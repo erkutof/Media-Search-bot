@@ -57,9 +57,9 @@ async def answer(bot, query):
                 reply_markup=reply_markup))
 
     if results:
-        switch_pm_text = f"{emoji.FILE_FOLDER} Sonuç"
+        switch_pm_text = f"{emoji.FILE_FOLDER} Sonuçlar"
         if string:
-            switch_pm_text += f" for {string}"
+            switch_pm_text += f" {string}"
 
         try:
             await query.answer(results=results,
