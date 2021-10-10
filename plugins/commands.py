@@ -66,7 +66,7 @@ async def start(bot, cmd):
                     f_caption = f"{files.file_name}"
                 buttons = [
                     [
-                        InlineKeyboardButton('Tekrar ara', switch_inline_query_current_chat='')
+                        InlineKeyboardButton('Ara', switch_inline_query_current_chat='')
                     ]
                     ]
                 await bot.send_cached_media(
@@ -98,7 +98,7 @@ async def start(bot, cmd):
             reply_markup=InlineKeyboardMarkup(
                 [
                     [
-                        InlineKeyboardButton("Tekrar ara", switch_inline_query_current_chat='')
+                        InlineKeyboardButton("Ara", switch_inline_query_current_chat='')
                     ]
                 ]
             )
