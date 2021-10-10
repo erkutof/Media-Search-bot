@@ -76,7 +76,7 @@ async def start(bot, cmd):
                     reply_markup=InlineKeyboardMarkup(buttons)
                     )
         except Exception as err:
-            await cmd.reply_text(f"SBir şeyler ters gitti.\n\n**Hata:** `{err}`")
+            await cmd.reply_text(f"Bir şeyler ters gitti.\n\n**Hata:** `{err}`")
     elif len(cmd.command) > 1 and cmd.command[1] == 'subscribe':
         invite_link = await bot.create_chat_invite_link(int(AUTH_CHANNEL))
         await bot.send_message(
