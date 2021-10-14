@@ -6,7 +6,6 @@ from info import START_MSG, CHANNELS, ADMINS, AUTH_CHANNEL, CUSTOM_FILE_CAPTION
 from utils import Media, get_file_details, get_size
 from pyrogram.errors import UserNotParticipant
 logger = logging.getLogger(__name__)
-
 @Client.on_message(filters.command("start"))
 async def start(bot, cmd):
     usr_cmdall1 = cmd.text
@@ -101,7 +100,7 @@ async def start(bot, cmd):
                        revoke=True
                     )
                     return
-            except Exception:
+            except UserNotParticipant:
                 await cmd.reply_text(
                     START_MSG,
                     parse_mode="Markdown",
@@ -114,6 +113,9 @@ async def start(bot, cmd):
                         ]
                     )
                 )
+                return
+            except Exception:
+                await cmd.reply_text("Ters giden bir şey mi var. @thebans ile iletişime geçin")
 
 
 @Client.on_message(filters.command('channel') & filters.user(ADMINS))
