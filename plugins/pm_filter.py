@@ -15,13 +15,12 @@ async def filter(client, message):
         invite_link = await client.create_chat_invite_link(int(AUTH_CHANNEL))
         try:
             user = await client.get_chat_member(int(AUTH_CHANNEL), message.from_user.id)
-            if user.status == "kicked":
-                await client.send_message(
-                    chat_id=message.from_user.id,
-                    text="Üzgünüm, beni kullanmanız yasaklandı.",
-                    parse_mode="markdown",
-                    disable_web_page_preview=True
-                )
+            if user.status == "kicked":                              
+                await client.delete_messages(
+                 chat_id=message.from_user.id,
+                 message_ids=essage.message_id,
+                 revoke=True
+               )
                 return
         except UserNotParticipant:
             await client.send_message(
