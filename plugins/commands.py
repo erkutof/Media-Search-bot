@@ -79,18 +79,28 @@ async def start(bot, cmd):
             await cmd.reply_text(f"Bir şeyler ters gitti.\n\n**Hata:** `{err}`")
     elif len(cmd.command) > 1 and cmd.command[1] == 'subscribe':
         invite_link = await bot.create_chat_invite_link(int(AUTH_CHANNEL))
-        await bot.send_message(
-            chat_id=cmd.from_user.id,
-            text="**Bu Bot'u Kullanmak İçin Kanala Katılmak Zorundasınız**",
-            reply_markup=InlineKeyboardMarkup(
-                [
+        try:
+            user = await bot.get_chat_member(int(AUTH_CHANNEL), cmd.from_user.id)
+            if user.status == "kicked":
+                await bot.delete_messages(
+                    chat_id=cmd.from_user.id,
+                    message_ids=cmd.message_id,
+                    revoke=True
+                )
+                return
+        except UserNotParticipant:
+            await bot.send_message(
+                chat_id=cmd.from_user.id,
+                text="**Bu Bot'u Kullanmak İçin Kanala Katılmak Zorundasınız**",
+                reply_markup=InlineKeyboardMarkup(
                     [
-                        InlineKeyboardButton("🤖 Kanala Katıl", url=invite_link.invite_link)
+                        [
+                            InlineKeyboardButton("🤖 Kanala Katıl", url=invite_link.invite_link)
+                        ]
                     ]
-                ]
-            ),
-            parse_mode="markdown"
-        )
+                ),
+                parse_mode="markdown"
+            )
     else:
         if AUTH_CHANNEL:
             invite_link = await bot.create_chat_invite_link(int(AUTH_CHANNEL))
