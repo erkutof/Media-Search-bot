@@ -16,11 +16,10 @@ async def start(bot, cmd):
             try:
                 user = await bot.get_chat_member(int(AUTH_CHANNEL), cmd.from_user.id)
                 if user.status == "kicked":
-                    await bot.send_message(
-                        chat_id=cmd.from_user.id,
-                        text="Üzgünüm, beni kullanmanız yasaklandı.",
-                        parse_mode="markdown",
-                        disable_web_page_preview=True
+                    await bot.delete_messages(
+                       chat_id=cmd.from_user.id,
+                       message_ids=update.message_id,
+                       revoke=True
                     )
                     return
             except UserNotParticipant:
