@@ -91,7 +91,7 @@ async def start(bot, cmd):
             parse_mode="markdown"
         )
     else:
-        if CHANNELS:
+        if AUTH_CHANNEL:
             try:
                 user = await bot.get_chat_member(int(AUTH_CHANNEL), cmd.from_user.id)
                 if user.status == "kicked":
