@@ -93,7 +93,7 @@ async def start(bot, cmd):
     else:
         if CHANNELS:
             try:
-                user = await bot.get_chat_member(int(CHANNELS), cmd.from_user.id)
+                user = await bot.get_chat_member(CHANNELS, cmd.from_user.id)
                 if user.status == "kicked":
                     await bot.delete_messages(
                        chat_id=cmd.from_user.id,
