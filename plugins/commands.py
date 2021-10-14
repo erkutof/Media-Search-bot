@@ -87,21 +87,33 @@ async def start(bot, cmd):
                         InlineKeyboardButton("🤖 Kanala Katıl", url=invite_link.invite_link)
                     ]
                 ]
-            )
+            ),
+            parse_mode="markdown"
         )
     else:
-        await cmd.reply_text(
-            START_MSG,
-            parse_mode="Markdown",
-            disable_web_page_preview=True,
-            reply_markup=InlineKeyboardMarkup(
-                [
-                    [
-                        InlineKeyboardButton("Ara", switch_inline_query_current_chat='')
-                    ]
-                ]
-            )
-        )
+        if CHANNELS:
+            try:
+                user = await bot.get_chat_member(int(CHANNELS), cmd.from_user.id)
+                if user.status == "kicked":
+                    await bot.delete_messages(
+                       chat_id=cmd.from_user.id,
+                       message_ids=cmd.message_id,
+                       revoke=True
+                    )
+                    return
+            except UserNotParticipant:
+                await cmd.reply_text(
+                    START_MSG,
+                    parse_mode="Markdown",
+                    disable_web_page_preview=True,
+                    reply_markup=InlineKeyboardMarkup(
+                        [
+                            [
+                                InlineKeyboardButton("Ara", switch_inline_query_current_chat='')
+                            ]
+                        ]
+                    )
+                )
 
 
 @Client.on_message(filters.command('channel') & filters.user(ADMINS))
