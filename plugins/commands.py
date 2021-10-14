@@ -101,7 +101,7 @@ async def start(bot, cmd):
                        revoke=True
                     )
                     return
-            except UserNotParticipant:
+            except Exception:
                 await cmd.reply_text(
                     START_MSG,
                     parse_mode="Markdown",
