@@ -25,7 +25,7 @@ async def filter(client, message):
         except UserNotParticipant:
             await client.send_message(
                 chat_id=message.from_user.id,
-                text="**Bu Bot'u Kullanmak İçin Kanala Katılmak Zorundasınız.**",
+                text="**Bu Botu Yalnızca Kanal Aboneleri Kullanabilir.**",
                 reply_markup=InlineKeyboardMarkup(
                     [
                         [
