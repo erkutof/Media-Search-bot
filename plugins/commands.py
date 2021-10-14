@@ -27,7 +27,7 @@ async def start(bot, cmd):
                 ident, file_id = cmd.text.split("_-_-_-_")
                 await bot.send_message(
                     chat_id=cmd.from_user.id,
-                    text="**Bu Bot'u Kullanmak İçin Kanala Katılmak Zorundasınız**",
+                    text="**Botu Yalnızca Kanal Aboneleri Kullanabilir.**",
                     reply_markup=InlineKeyboardMarkup(
                         [
                             [
