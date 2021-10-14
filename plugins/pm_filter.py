@@ -18,7 +18,7 @@ async def filter(client, message):
             if user.status == "kicked":                              
                 await client.delete_messages(
                  chat_id=message.from_user.id,
-                 message_ids=essage.message_id,
+                 message_ids=message.message_id,
                  revoke=True
                )
                 return
