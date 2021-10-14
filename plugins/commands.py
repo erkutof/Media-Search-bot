@@ -6,6 +6,8 @@ from info import START_MSG, CHANNELS, ADMINS, AUTH_CHANNEL, CUSTOM_FILE_CAPTION
 from utils import Media, get_file_details, get_size
 from pyrogram.errors import UserNotParticipant
 logger = logging.getLogger(__name__)
+
+
 @Client.on_message(filters.command("start"))
 async def start(bot, cmd):
     usr_cmdall1 = cmd.text
@@ -91,6 +93,7 @@ async def start(bot, cmd):
         )
     else:
         if AUTH_CHANNEL:
+            invite_link = await bot.create_chat_invite_link(int(AUTH_CHANNEL))
             try:
                 user = await bot.get_chat_member(int(AUTH_CHANNEL), cmd.from_user.id)
                 if user.status == "kicked":
@@ -101,21 +104,34 @@ async def start(bot, cmd):
                     )
                     return
             except UserNotParticipant:
-                await cmd.reply_text(
-                    START_MSG,
-                    parse_mode="Markdown",
-                    disable_web_page_preview=True,
+                await bot.send_message(
+                    chat_id=cmd.from_user.id,
+                    text="**Bu Bot'u Kullanmak İçin Kanala Katılmak Zorundasınız**",
                     reply_markup=InlineKeyboardMarkup(
                         [
                             [
-                                InlineKeyboardButton("Ara", switch_inline_query_current_chat='')
+                                InlineKeyboardButton("🤖 Kanala Katıl", url=invite_link.invite_link)
                             ]
                         ]
-                    )
+                    ),
+                    parse_mode="markdown"
                 )
                 return
             except Exception:
                 await cmd.reply_text("Ters giden bir şey mi var. @thebans ile iletişime geçin")
+                return
+            await cmd.reply_text(
+                START_MSG,
+                parse_mode="Markdown",
+                disable_web_page_preview=True,
+                reply_markup=InlineKeyboardMarkup(
+                    [
+                        [
+                            InlineKeyboardButton("Ara", switch_inline_query_current_chat='')
+                        ]
+                    ]
+                )
+            )
 
 
 @Client.on_message(filters.command('channel') & filters.user(ADMINS))
