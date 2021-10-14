@@ -18,7 +18,7 @@ async def start(bot, cmd):
                 if user.status == "kicked":
                     await bot.delete_messages(
                        chat_id=cmd.from_user.id,
-                       message_ids=update.message_id,
+                       message_ids=cmd.message_id,
                        revoke=True
                     )
                     return
