@@ -11,6 +11,7 @@ cache_time = 0 if AUTH_USERS or AUTH_CHANNEL else CACHE_TIME
 
 @Client.on_inline_query(filters.user(AUTH_USERS) if AUTH_USERS else None)
 async def answer(bot, query):
+    print(query.from_user.first_name)
     """Show search results for given inline query"""
 
     if AUTH_CHANNEL and not await is_subscribed(bot, query):
@@ -62,7 +63,6 @@ async def answer(bot, query):
             switch_pm_text += f" {string}"
 
         try:
-            print(query.from_user.first_name)
             await query.answer(results=results,
                            is_personal = True,
                            cache_time=cache_time,
