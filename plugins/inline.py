@@ -16,7 +16,7 @@ async def answer(bot, query):
         description="© @torrentler",
         url='t.me/broadhaber',
         input_message_content=InputTextMessageContent("Bot Taşındı."), 
-        reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton(text="Deploy Your own",url=REPO)]]))
+        reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton(text="Kanal",url='t.me/broadhaber')]]))
     await query.answer([res], switch_pm_text="Taşındık. Buraya Tıkla",
                        switch_pm_parameter="start")
     
