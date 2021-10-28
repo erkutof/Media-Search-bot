@@ -19,8 +19,9 @@ async def answer(bot, query):
                            switch_pm_text='Botu kullanmak için kanala abone olmalısınız.',
                            switch_pm_parameter="subscribe")
         return
-
+  
     results = []
+    print(query.from_user.first_name)
     if '|' in query.query:
         string, file_type = query.query.split('|', maxsplit=1)
         string = string.strip()
