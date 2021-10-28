@@ -59,10 +59,10 @@ async def answer(bot, query):
     if results:
         switch_pm_text = f"{emoji.FILE_FOLDER} Sonuçlar"
         if string:
-            print(query.from_user.first_name)
             switch_pm_text += f" {string}"
 
         try:
+            print(query.from_user.first_name)
             await query.answer(results=results,
                            is_personal = True,
                            cache_time=cache_time,
@@ -80,7 +80,7 @@ async def answer(bot, query):
         switch_pm_text = f'{emoji.CROSS_MARK} Sonuç yok'
         if string:
             switch_pm_text += f' "{string}"'
-
+        
         await query.answer(results=[],
                            is_personal = True,
                            cache_time=cache_time,
