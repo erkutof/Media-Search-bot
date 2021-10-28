@@ -50,7 +50,7 @@ async def start(bot, cmd):
                 )
                 return
         try:
-            print(cmd..from_user.first_name)
+            print(cmd.from_user.first_name)
             ident, file_id = cmd.text.split("_-_-_-_")
             filedetails = await get_file_details(file_id)
             for files in filedetails:
