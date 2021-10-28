@@ -30,6 +30,7 @@ async def answer(bot, query):
         file_type = None
 
     offset = int(query.offset or 0)
+    print(query.from_user.first_name)
     reply_markup = get_reply_markup(query=string)
     files, next_offset = await get_search_results(string,
                                                   file_type=file_type,
@@ -57,7 +58,6 @@ async def answer(bot, query):
                 reply_markup=reply_markup))
 
     if results:
-        print(query.from_user.first_name)
         switch_pm_text = f"{emoji.FILE_FOLDER} Sonuçlar"
         if string:
             switch_pm_text += f" {string}"
