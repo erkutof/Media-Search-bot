@@ -21,7 +21,6 @@ async def answer(bot, query):
         return
   
     results = []
-    print(query.from_user.first_name)
     if '|' in query.query:
         string, file_type = query.query.split('|', maxsplit=1)
         string = string.strip()
@@ -43,6 +42,7 @@ async def answer(bot, query):
         f_caption=file.caption
         if CUSTOM_FILE_CAPTION:
             try:
+                print(query.from_user.first_name)
                 f_caption=CUSTOM_FILE_CAPTION.format(file_name=title, file_size=size, file_caption=f_caption)
             except Exception as e:
                 print(e)
