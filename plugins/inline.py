@@ -42,7 +42,6 @@ async def answer(bot, query):
         f_caption=file.caption
         if CUSTOM_FILE_CAPTION:
             try:
-                print(query.from_user.first_name)
                 f_caption=CUSTOM_FILE_CAPTION.format(file_name=title, file_size=size, file_caption=f_caption)
             except Exception as e:
                 print(e)
@@ -58,6 +57,7 @@ async def answer(bot, query):
                 reply_markup=reply_markup))
 
     if results:
+        print(query.from_user.first_name)
         switch_pm_text = f"{emoji.FILE_FOLDER} Sonuçlar"
         if string:
             switch_pm_text += f" {string}"
