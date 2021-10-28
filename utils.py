@@ -164,7 +164,6 @@ async def get_file_details(query):
 
 async def is_subscribed(bot, query):
     try:
-        print(query.from_user.first_name)
         user = await bot.get_chat_member(AUTH_CHANNEL, query.from_user.id)
     except UserNotParticipant:
         pass
