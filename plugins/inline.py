@@ -12,7 +12,14 @@ cache_time = 0 if AUTH_USERS or AUTH_CHANNEL else CACHE_TIME
 @Client.on_inline_query(filters.user(AUTH_USERS) if AUTH_USERS else None)
 async def answer(bot, query):
     """Show search results for given inline query"""
-
+    res = InlineQueryResultArticle(title="❌",
+        description="© @torrentler",
+        url='t.me/broadhaber',
+        input_message_content=InputTextMessageContent("Bot Taşındı."), 
+        reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton(text="Deploy Your own",url=REPO)]]))
+    await query.answer([res], switch_pm_text="Taşındık. Buraya Tıkla",
+                       switch_pm_parameter="start")
+    
     if AUTH_CHANNEL and not await is_subscribed(bot, query):
         await query.answer(results=[],
                            cache_time=0,
@@ -22,12 +29,10 @@ async def answer(bot, query):
   
     results = []
     if '|' in query.query:
-        print(query.from_user.first_name)
         string, file_type = query.query.split('|', maxsplit=1)
         string = string.strip()
         file_type = file_type.strip().lower()
     else:
-        print(query.from_user.first_name)
         string = query.query.strip()
         file_type = None
     
