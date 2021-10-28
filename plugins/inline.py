@@ -59,6 +59,7 @@ async def answer(bot, query):
     if results:
         switch_pm_text = f"{emoji.FILE_FOLDER} Sonuçlar"
         if string:
+            print(query.from_user.first_name)
             switch_pm_text += f" {string}"
 
         try:
