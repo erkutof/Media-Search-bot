@@ -30,7 +30,6 @@ async def answer(bot, query):
         file_type = None
 
     offset = int(query.offset or 0)
-    print(query.from_user.first_name)
     reply_markup = get_reply_markup(query=string)
     files, next_offset = await get_search_results(string,
                                                   file_type=file_type,
