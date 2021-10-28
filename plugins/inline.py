@@ -11,7 +11,6 @@ cache_time = 0 if AUTH_USERS or AUTH_CHANNEL else CACHE_TIME
 
 @Client.on_inline_query(filters.user(AUTH_USERS) if AUTH_USERS else None)
 async def answer(bot, query):
-    print(query.from_user.first_name)
     """Show search results for given inline query"""
 
     if AUTH_CHANNEL and not await is_subscribed(bot, query):
@@ -23,13 +22,14 @@ async def answer(bot, query):
   
     results = []
     if '|' in query.query:
+        print(query.from_user.first_name)
         string, file_type = query.query.split('|', maxsplit=1)
         string = string.strip()
         file_type = file_type.strip().lower()
     else:
         string = query.query.strip()
         file_type = None
-
+    
     offset = int(query.offset or 0)
     reply_markup = get_reply_markup(query=string)
     files, next_offset = await get_search_results(string,
