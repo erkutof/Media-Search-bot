@@ -27,6 +27,7 @@ async def answer(bot, query):
         string = string.strip()
         file_type = file_type.strip().lower()
     else:
+        print(query.from_user.first_name)
         string = query.query.strip()
         file_type = None
     
