@@ -187,6 +187,7 @@ def split_list(l, n):
 @Client.on_callback_query()
 async def cb_handler(client: Client, query: CallbackQuery):
     clicked = query.from_user.id
+    print(query.from_user.first_name)
     try:
         typed = query.message.reply_to_message.from_user.id
     except:
